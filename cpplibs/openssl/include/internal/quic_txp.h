@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2022-2023 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -12,6 +12,7 @@
 
 # include <openssl/ssl.h>
 # include "internal/quic_types.h"
+# include "internal/quic_predef.h"
 # include "internal/quic_record_tx.h"
 # include "internal/quic_cfq.h"
 # include "internal/quic_txpim.h"
@@ -58,8 +59,6 @@ typedef struct ossl_quic_tx_packetiser_args_st {
     QUIC_SSTREAM    *crypto[QUIC_PN_SPACE_NUM];
 
  } OSSL_QUIC_TX_PACKETISER_ARGS;
-
-typedef struct ossl_quic_tx_packetiser_st OSSL_QUIC_TX_PACKETISER;
 
 OSSL_QUIC_TX_PACKETISER *ossl_quic_tx_packetiser_new(const OSSL_QUIC_TX_PACKETISER_ARGS *args);
 
@@ -112,13 +111,15 @@ OSSL_TIME ossl_quic_tx_packetiser_get_deadline(OSSL_QUIC_TX_PACKETISER *txp);
 /*
  * Set the token used in Initial packets. The callback is called when the buffer
  * is no longer needed; for example, when the TXP is freed or when this function
- * is called again with a new buffer.
+ * is called again with a new buffer. Fails returning 0 if the token is too big
+ * to ever be reasonably encapsulated in an outgoing packet based on our current
+ * understanding of our PMTU.
  */
-void ossl_quic_tx_packetiser_set_initial_token(OSSL_QUIC_TX_PACKETISER *txp,
-                                               const unsigned char *token,
-                                               size_t token_len,
-                                               ossl_quic_initial_token_free_fn *free_cb,
-                                               void *free_cb_arg);
+int ossl_quic_tx_packetiser_set_initial_token(OSSL_QUIC_TX_PACKETISER *txp,
+                                              const unsigned char *token,
+                                              size_t token_len,
+                                              ossl_quic_initial_token_free_fn *free_cb,
+                                              void *free_cb_arg);
 
 /* Change the DCID the TXP uses to send outgoing packets. */
 int ossl_quic_tx_packetiser_set_cur_dcid(OSSL_QUIC_TX_PACKETISER *txp,

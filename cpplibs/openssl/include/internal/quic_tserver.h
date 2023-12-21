@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2022-2023 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -210,6 +210,10 @@ int ossl_quic_tserver_new_ticket(QUIC_TSERVER *srv);
  */
 int ossl_quic_tserver_set_max_early_data(QUIC_TSERVER *srv,
                                          uint32_t max_early_data);
+
+/* Set the find session callback for getting a server PSK */
+void ossl_quic_tserver_set_psk_find_session_cb(QUIC_TSERVER *srv,
+                                               SSL_psk_find_session_cb_func cb);
 
 # endif
 

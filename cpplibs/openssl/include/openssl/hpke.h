@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2022-2023 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the OpenSSL license (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -26,6 +26,7 @@
  * Appendix A.6.1 with a 66 octet IKM so we'll allow that.
  */
 # define OSSL_HPKE_MAX_PARMLEN        66
+# define OSSL_HPKE_MIN_PSKLEN         32
 # define OSSL_HPKE_MAX_INFOLEN        1024
 
 /*

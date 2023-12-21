@@ -1,5 +1,5 @@
 /*
- * Copyright 1995-2022 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 1995-2023 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -19,11 +19,11 @@
 # include "internal/nelem.h"
 
 # if defined(__GNUC__) || defined(__clang__)
-#  define likely(x)     __builtin_expect(!!(x), 1)
-#  define unlikely(x)   __builtin_expect(!!(x), 0)
+#  define ossl_likely(x)     __builtin_expect(!!(x), 1)
+#  define ossl_unlikely(x)   __builtin_expect(!!(x), 0)
 # else
-#  define likely(x)     x
-#  define unlikely(x)   x
+#  define ossl_likely(x)     x
+#  define ossl_unlikely(x)   x
 # endif
 
 # if defined(__GNUC__) || defined(__clang__)
@@ -38,7 +38,7 @@
 # endif
 
 # ifdef NDEBUG
-#  define ossl_assert(x) ((x) != 0)
+#  define ossl_assert(x) ossl_likely((x) != 0)
 # else
 __owur static ossl_inline int ossl_assert_int(int expr, const char *exprstr,
                                               const char *file, int line)

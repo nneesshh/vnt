@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2022-2023 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -13,6 +13,7 @@
 # include <openssl/ssl.h>
 # include "internal/quic_wire_pkt.h"
 # include "internal/quic_types.h"
+# include "internal/quic_predef.h"
 # include "internal/quic_record_util.h"
 
 # ifndef OPENSSL_NO_QUIC
@@ -148,7 +149,7 @@ uint32_t ossl_qrl_get_suite_cipher_tag_len(uint32_t suite_id);
  * -------------------
  */
 
-typedef struct ossl_qtx_pkt_st {
+struct ossl_qtx_pkt_st {
     /* Logical packet header to be serialized. */
     QUIC_PKT_HDR               *hdr;
 
@@ -176,7 +177,7 @@ typedef struct ossl_qtx_pkt_st {
 
     /* Packet flags. Zero or more OSSL_QTX_PKT_FLAG_* values. */
     uint32_t                    flags;
-} OSSL_QTX_PKT;
+};
 
 /*
  * More packets will be written which should be coalesced into a single
