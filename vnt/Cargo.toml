@@ -28,8 +28,8 @@ aes = "0.8.3"
 stun-format = { version = "1.0.1", features = ["fmt", "rfc3489"] }
 rsa = { version = "0.9.2", features = [] ,optional = true}
 spki = { version = "0.7.2", features = ["fingerprint", "alloc","base64"] ,optional = true}
-openssl-sys = { git = "https://github.com/lbl8603/rust-openssl" ,optional = true}
-libsm = {git="https://github.com/lbl8603/libsm" ,optional = true}
+openssl-sys = { path = "../rust-openssl/openssl-sys", optional = true }
+libsm = { path = "../libsm", optional = true }
 
 [target.'cfg(any(target_os = "linux",target_os = "macos"))'.dependencies]
 tun = { path = "./rust-tun" }
