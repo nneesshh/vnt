@@ -1,6 +1,3 @@
-[submodule "libsm"]
-	path = libsm
-	url = https://github.com/nneessh/libsm
 [submodule "rust-openssl"]
 	path = rust-openssl
 	url = https://github.com/nneesshh/rust-openssl
