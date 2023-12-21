@@ -33,7 +33,6 @@ winapi = { version = "0.3.9", features = ["handleapi", "processthreadsapi", "win
 [features]
 default = ["server_encrypt","aes_gcm","aes_cbc","aes_ecb","sm4_cbc","ip_proxy"]
 openssl = ["vnt/openssl"]
-openssl-vendored = ["vnt/openssl-vendored"]
 ring-cipher = ["vnt/ring-cipher"]
 aes_cbc=["vnt/aes_cbc"]
 aes_ecb=["vnt/aes_ecb"]

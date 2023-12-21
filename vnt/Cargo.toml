@@ -34,10 +34,9 @@ libsm = { path = "../libsm", optional = true }
 [target.'cfg(any(target_os = "linux",target_os = "macos"))'.dependencies]
 tun = { path = "./rust-tun" }
 
-[target.'cfg(target_os = "windows")'.dependencies]
+[target.'cfg(windows)'.dependencies]
 win-tun-tap = { path = "./win-tun-tap" }
 libloading = "0.8.0"
-
 
 [build-dependencies]
 protobuf-codegen = "3.2.0"
@@ -46,8 +45,6 @@ protoc-bin-vendored = "3.0.0"
 [features]
 default = ["server_encrypt","aes_gcm","aes_cbc","aes_ecb","sm4_cbc","ip_proxy"]
 openssl = ["openssl-sys"]
-# 从源码编译
-openssl-vendored = ["openssl-sys/vendored"]
 ring-cipher = ["ring"]
 aes_cbc=["cbc"]
 aes_ecb=["ecb"]
